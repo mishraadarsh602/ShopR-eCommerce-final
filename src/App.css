@@ -1,0 +1,527 @@
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+  body{
+    font-family: 'Montserrat', sans-serif!important;
+
+  }
+  .footerHead{
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+  }
+  .textplayfair{
+    font-family: 'Playfair Display', serif!important;
+    color: #1C1C1C;
+
+  }
+  .textmontserrat{
+    font-family: 'Montserrat', sans-serif!important;
+
+  }
+
+  @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+#social {
+  margin: 20px 10px;
+  text-align: center;
+}
+
+.smGlobalBtn{ /* global button class */
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 2px 2px #999;
+    padding: 0px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 2em;
+    border-radius: 25px;
+    -moz-border-radius:25px;
+    -webkit-border-radius:25px;
+    margin-right:10px;
+}
+
+/* facebook button class*/
+.facebookBtn{
+    background: #4060A5;
+}
+
+.facebookBtn:before{ /* use :before to add the relevant icons */
+    font-family: "FontAwesome";
+    content: "\f09a"; /* add facebook icon */
+}
+
+.facebookBtn:hover{
+    color: #4060A5;
+    background: #fff;
+}
+
+/* twitter button class*/
+.twitterBtn{
+    background: #00ABE3;
+}
+
+.twitterBtn:before{
+      font-family: "FontAwesome";
+      content: "\f099"; /* add twitter icon */
+}
+
+.twitterBtn:hover{
+      color: #00ABE3;
+      background: #fff;
+}
+
+/* google plus button class*/
+.googleplusBtn{
+    background: #e64522;
+}
+
+.googleplusBtn:before{
+      font-family: "FontAwesome";
+      content: "\f0d5"; /* add googleplus icon */
+}
+
+.googleplusBtn:hover{
+      color: #e64522;
+      background: #fff;
+}
+
+/* linkedin button class*/
+.linkedinBtn{
+    background: #0094BC;
+}
+
+.linkedinBtn:before{
+      font-family: "FontAwesome";
+      content: "\f0e1"; /* add linkedin icon */
+}
+
+.linkedinBtn:hover{
+      color: #0094BC;
+      background: #fff;
+}
+
+/* pinterest button class*/
+.pinterestBtn{
+    background: #cb2027;
+}
+
+.pinterestBtn:before{
+      font-family: "FontAwesome";
+      content: "\f0d2"; /* add pinterest icon */
+}
+
+.pinterestBtn:hover{
+      color: #cb2027;
+      background: #fff;
+}
+
+/* tumblr button class*/
+.tumblrBtn{
+    background: #3a5876;
+}
+
+.tumblrBtn:before{
+      font-family: "FontAwesome";
+      content: "\f173"; /* add tumblr icon */
+}
+
+.tumblrBtn:hover{
+      color: #3a5876;
+      background: #fff;
+}
+
+/* rss button class*/
+.rssBtn{
+    background: #e88845;
+}
+
+.rssBtn:before{
+      font-family: "FontAwesome";
+      content: "\f09e"; /* add rss icon */
+}
+
+.rssBtn:hover{
+      color: #e88845;
+      background: #fff;
+}
+
+/*instagram*/
+
+/* rss button class*/
+.instagramBtn{
+    background: #f09433; 
+background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+ 
+}
+
+.instagramBtn:before{
+      font-family: "FontAwesome";
+      content: "\f16d"; /* add instagram icon */
+}
+
+.instagramBtn:hover{
+      color: #e88845;
+      background: #fff;
+}
+
+.footer ul li a{
+    font-size:14px;
+}
+.footer p{
+    font-size:14px;
+    line-height:27px;
+}
+.footer .socials ul li {
+    font-size: 16px;
+}
+.productsec .productCard {
+    height:0px!important;
+    overflow: hidden;
+   
+}
+.productsec:hover  .productCard {
+    -moz-transition: height .6s ease;
+    -webkit-transition: height .6s ease;
+    -o-transition: height .6s ease;
+    transition: height .6s ease;
+    height:100%!important;
+    position: absolute!important;
+    top: 0!important;
+    bottom: 0!important;
+    right: 0!important;
+    left: 0!important;
+    /* background: #00000061; */
+    backdrop-filter: blur(3px);
+    align-items: center;
+    animation: 3s ease-in-out ;
+}
+.productCard svg{
+   
+    height: 35px;
+    width: 35px;
+    background: #fff;
+    color: #770015;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 9px;
+}
+.productCard svg path{
+    fill: #770015;
+}
+.productCard svg:hover{
+    background:#770015;
+
+}
+.productCard svg:hover path{
+    fill: #ffffff;
+}
+.notprice,.discountpercent{
+    color:#FF0000;
+}
+
+.prosize{
+    height:18px!important;
+    padding:20px!important;
+}
+.productdetails .mainimg img{
+    height:400px!important;
+}
+.wishlistbtn svg path{
+  fill:#ffffff;
+}
+
+.slick-prev, .slick-next{
+    z-index: 2!important;
+    opacity: 1!important;
+
+}
+.slick-prev:before, .slick-next:before{
+    font-size: 43px!important;
+    color: #d6d6d6!important;
+}
+
+#imageMagnifyer{
+/*  
+    width:400px!important;
+    overflow: hidden!important;
+    */
+}
+/* .magnifyercontainerclass{
+    height:600px;
+    width:600px;
+    overflow: hidden;
+}
+.magnifyerimgclass{
+    height:900px;
+    width:1600px
+} */
+
+.mobilefilter{
+    z-index: 99!important;
+}
+
+.banner{
+    /* width: 1366px; */
+    width: 100%;
+/* height: 632px; */
+height:540px;
+background: url('/src/images/home/banners/banner1.jpg'), lightgray 50% / cover no-repeat;
+/* , lightgray 50% / cover no-repeat */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+ .catimg{
+    width: 170px;
+    /* height: 170px; */
+    flex-shrink: 0;
+    border-radius: 50%;
+
+}
+.catbg1{
+    background-color:#F1DBE9;
+
+}
+.catbg2 {
+    background-color: #DDD3EB;
+   
+}
+.catbg3 {
+    background-color:#D3EAEB;
+   
+}
+.catbg4 {
+    background-color:#EFF1D9;;
+   
+}
+.catbg5 {
+    background-color:#F1DADB;
+   
+}
+.catbg6 {
+    background-color:#D9F1DE;;
+   
+}
+
+.cattext{
+    color: #1C1C1C;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.cardcatbg1{
+    background: #06B8A6;   
+}
+.cardcatbg2{
+    background: #80E8FF;
+}
+.cardcatbg3{
+    background: #DC493A;   
+}
+.cardcatbg4{
+    background: #D7B2FF;  
+}.cardcatbg5{
+    background: #F0BC8C;   
+}
+.cardcatbg6{
+    background: #4392F1;  
+}
+.bgColor{
+  background-color:  #CCCEA7;
+}
+.bgColor2{
+    background-color: #D6BEBE;
+  }
+  .bgColor3{
+    background: #F5F4F2;
+}
+.redcircle{
+    width: 218.248px;
+    height: 218.248px;
+    background-color: #770015;
+}
+.redcircle2{
+/* width: 377.346px;
+height: 341.464px; */
+transform: rotate(-60.628deg);
+flex-shrink: 0;
+}
+.redcircle2-left{
+    left:0;
+    transform: rotateX(2deg);
+}
+.redcircle2-right{
+    right: 0;
+    transform: rotateX(-27deg);
+}
+.trendingtext{
+    color:  #1C1C1C;
+text-align: center;
+font-family:"Montserrat";
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+/* padding: 0 55px; */
+}
+.custom-red-btn{
+    width: 170px;
+height: 48px;
+flex-shrink: 0;
+    background: #770015;
+    color: #ffffff;
+}
+.category-card{
+    width: 170px;
+    height: 170px;
+    flex-shrink: 0;
+    border-radius: 170px;
+}
+.cardcategory-card .box{
+    background: linear-gradient(137deg, rgba(255, 255, 255, 0.40) 0.55%, rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(32px);
+}
+
+.features .banner-text:after{
+    content: "";
+    display: block;
+    width: 114px;
+    position: relative;
+    left: 133px;
+    top: -73px;
+    background-color: #FFC7D1;
+    height: 2px;
+    rotate: 90deg;
+    right: 0;
+    /* position: absolute; */
+    right: 0;
+    
+}
+.features .banner-text:last-child:after{
+    display: none;
+}
+.subscription{
+    background: linear-gradient(136deg, #AB001E 0%, #770015 100%);
+}
+
+.subscription form input{
+    background: rgba(255, 255, 255, 0.32);
+}
+.subscription button{
+    top:1px;
+
+}
+
+/* -------------------------------------------------------------------------------
+                                Media Query Starts
+-------------------------------------------------------------------------------- */
+
+@media only screen and (min-width:1600px){
+   .banner{
+    height:723px;
+   }
+ }
+@media only screen and (min-width:1220px){
+   .trendingtext{
+    padding: 0 49px!important;
+   }  
+}
+@media only screen and (min-width:991px) and (max-width:1220px){
+    .features .banner-text:after{
+        left:120px;
+    }
+    .banner{
+        height:400px;
+    }
+}
+@media only screen and (max-width:991px){
+ .banner{
+    background-position: right;
+ }
+ .features .banner-text:nth-child(2):after,.features .banner-text:nth-child(4):after{
+    display: none;
+ }
+ .features .banner-text:after{
+    left:57%;
+
+ }
+}
+
+@media only screen and (min-width:768px) and (max-width:991px) {
+    .banner{
+        height:373px;
+    }
+}
+@media only screen and (min-width:585px) and (max-width:767px){
+    .banner{
+        height:271px;
+    }
+    .redcircle{
+        display: none;
+    }
+    .sidebarmenu{
+        width:400px!important;
+    }
+    .redcircle2-right{
+        right:-90px;
+
+    }
+.redcircle2-left{
+        left:-100px;
+        
+    }
+}
+
+@media only screen and (max-width:585px) {
+    .sidebarmenu{
+        width:100%!important;
+    }
+    .redcircle{
+        display: none;
+    }
+    /* .productsec{
+        height:300px;
+    } */
+    .prosize{
+        padding:15px!important;
+        
+    }
+   
+    .banner{
+        height: 202px;
+        background-position: right;
+    }
+    .redcircle2-right{
+        right:-90px;
+
+    }
+.redcircle2-left{
+        left:-100px;
+        
+    }
+}
+@media only screen and (max-width:385px){
+    .custom-cols-1{
+        display: flex!important;
+        flex-direction: column!important;
+    }
+    .features .banner-text:after{
+        display: none;
+    
+     }
+     .banner{
+        height:162px;
+     }
+
+}

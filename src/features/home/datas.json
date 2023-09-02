@@ -1,0 +1,119 @@
+[
+
+    {
+      "id": 1,
+      "title": "Men Henley Neck Full Sleeve Red Wine",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "price": 1299,
+      "discountPercent":399,
+      "rating": 4,
+      "thumbnail": "assets/images/home/trending/tshirt1.jpg",
+      "category": "mens tshirts",
+      "countInStock": 10,
+      "numReviews": 12,
+      "isTrending": true,
+      "isFeatured": false
+    },
+    
+    {
+      "id": 2,
+      "title": "Men Henley Neck Full Sleeve Red Wine",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "price": 1299,
+      "discountPercent":399,
+      "rating": 4,
+      "thumbnail": "assets/images/home/trending/tshirt2.jpg",
+      "category": "mens tshirts",
+      "countInStock": 10,
+      "numReviews": 12,
+      "isTrending": true,
+      "isFeatured": false
+    },
+    {
+      "id": 3,
+      "title": "Men Henley Neck Full Sleeve Red Wine",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "price": 1299,
+      "discountPercent":399,
+      "rating": 4,
+      "thumbnail": "assets/images/home/trending/tshirt3.jpg",
+      "category": "mens tshirts",
+      "countInStock": 10,
+      "numReviews": 12,
+      "isTrending": true,
+      "isFeatured": false
+    },
+    {
+      "id": 4,
+      "title": "Men Henley Neck Full Sleeve Red Wine",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "price": 1299,
+      "discountPercent":399,
+      "rating": 4,
+      "thumbnail": "assets/images/home/trending/tshirt4.jpg",
+      "category": "mens tshirts",
+      "countInStock": 10,
+      "numReviews": 12,
+      "isTrending": true,
+      "isFeatured": false
+    },
+    
+    {
+      "id": 5,
+      "title": "Men Henley Neck Full Sleeve Red Wine",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "price": 1299,
+      "discountPercent":399,
+      "rating": 4,
+      "thumbnail": "assets/images/home/trending/tshirt1.jpg",
+      "category": "mens tshirts",
+      "countInStock": 10,
+      "numReviews": 12,
+      "isTrending": true,
+      "isFeatured": false
+    },
+    
+    {
+      "id": 6,
+      "title": "Men Henley Neck Full Sleeve Red Wine",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "price": 1299,
+      "discountPercent":399,
+      "rating": 4,
+      "thumbnail": "assets/images/home/trending/tshirt2.jpg",
+      "category": "mens tshirts",
+      "countInStock": 10,
+      "numReviews": 12,
+      "isTrending": true,
+      "isFeatured": false
+    },
+    {
+      "id": 7,
+      "title": "Men Henley Neck Full Sleeve Red Wine",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "price": 1299,
+      "discountPercent":399,
+      "rating": 4,
+      "thumbnail": "assets/images/home/trending/tshirt3.jpg",
+      "category": "mens tshirts",
+      "countInStock": 10,
+      "numReviews": 12,
+      "isTrending": true,
+      "isFeatured": false
+    },
+    {
+      "id": 8,
+      "title": "Men Henley Neck Full Sleeve Red Wine",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "price": 1299,
+      "discountPercent":399,
+      "rating": 4,
+      "thumbnail": "assets/images/home/trending/tshirt4.jpg",
+      "category": "mens tshirts",
+      "countInStock": 10,
+      "numReviews": 12,
+      "isTrending": true,
+      "isFeatured": false
+    }
+
+  ]
