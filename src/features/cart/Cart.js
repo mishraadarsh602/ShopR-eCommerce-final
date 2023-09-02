@@ -5,7 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useState } from 'react';
 // import { Dialog, Transition } from '@headlessui/react';
 // import { XMarkIcon } from '@heroicons/react/24/outline';
-import { deleteItemFromCartAsync, selectItems, updateCartAsync } from './cartSlice';
+import { deleteItemFromCartAsync, selectCartLoaded, selectCartStatus, selectItems, updateCartAsync } from './cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { discountedPrice } from '../../app/constants';
 import Modal from '../common/Modal';
@@ -13,10 +13,11 @@ import Modal from '../common/Modal';
 const Cart = () => {
     // useSelector(selectCount);
     const dispatch = useDispatch();
+    const cartStatus = useSelector(selectCartStatus);
+    const cartLoaded = useSelector(selectCartLoaded);
     const [open, setOpen] = useState(true);
     const items = useSelector(selectItems);
     const [openModal, setOpenModal] = useState(null);
-    console.log("items : ",items);
     const totalAmount = items.reduce((amount, item) => amount + discountedPrice(item.product) * item.quantity, 0);
     
     const totalItems = items.reduce((total, item) => total + item.quantity, 0);
@@ -28,7 +29,7 @@ const Cart = () => {
     }
     return (
         <>
-            {!items.length && <Navigate to="/" replace={true}> </Navigate>}
+            {!items.length &&  cartLoaded && <Navigate to="/" replace={true}> </Navigate>}
 
             <div className="mx-auto mt-8 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
                 <h1 className="text-4xl my-5 pt-5 font-bold tracking-tight text-gray-900">Cart</h1>

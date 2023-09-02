@@ -59,7 +59,7 @@ const handleDelete = ()=>{
 return (
     <div>
         <form onSubmit={handleSubmit((data) => {
-            // dispatch(checkUserAsync({ email: data.email, password: data.password }))
+            // dispatch(loginUserAsync({ email: data.email, password: data.password }))
             const product = { ...data }
             product.images = [product.image1, product.image2, product.image3, product.thumbnail];
             delete product.image1;

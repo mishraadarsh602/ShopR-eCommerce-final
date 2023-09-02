@@ -3,7 +3,8 @@ import {addToCart, fetchItemsByUserId, updateCart, deleteItemFromCart, resetCart
 
 const initialState = {
    status:'idle',
-  items:[]
+  items:[],
+  cartLoaded:false,
 }
 //action userdata 
 export const addToCartAsync = createAsyncThunk(
@@ -89,7 +90,11 @@ export const cartReducer = createSlice({
       .addCase(fetchItemsByUserIdAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.items=action.payload;
-
+        state.cartLoaded=true;
+      })
+      .addCase(fetchItemsByUserIdAsync.rejected, (state, action) => {
+        state.status = 'idle';
+        state.cartLoaded=true;
       })
       .addCase( updateCartAsync.pending, (state) => {
         state.status = 'loading';
@@ -130,4 +135,5 @@ export const cartReducer = createSlice({
 
 export default cartReducer.reducer;
 export const selectItems = (state) => state.carts.items;
-
+export const selectCartStatus = (state) => state.carts.status;
+export const selectCartLoaded = (state) => state.carts.cartLoaded;
