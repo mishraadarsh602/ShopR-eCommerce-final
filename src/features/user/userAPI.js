@@ -34,7 +34,7 @@ export function updateUser(update) {
          resolve({ data })
       } catch(err){
          reject(err);
-         console.log("updateUser in userApi reject ", err)
+         // console.log("updateUser in userApi reject ", err)
 
       }
     

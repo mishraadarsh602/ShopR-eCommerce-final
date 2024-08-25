@@ -60,15 +60,7 @@ export const userReducer = createSlice({
       })
       .addCase(fetchLoggedInUserOrdersAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        // if(action.payload){
-          // state.userInfo.userOrders = [];
-        // }else{
-        //   state.userInfo.userOrders = [];
-        // }
           state.userInfo.userOrders = action.payload;
-        
-      
-
       })
       .addCase(updateUserAsync.pending, (state) => {
         state.status = 'loading';

@@ -31,6 +31,7 @@ import ProductListPage from './features/pages/ProductListPage';
 //react alert
 import { positions, Provider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import StripeCheckout from './features/pages/StripeCheckout';
 
 const options = {
   timeout: 5000,
@@ -39,12 +40,12 @@ const options = {
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Protected><Home /></Protected>,
+  },
+  {
+    path: "/our-products",
     element: <Protected><ProductListPage /></Protected>,
   },
-  // {
-  //   path: "/our-products",
-  //   element: <Protected><ProductListPage /></Protected>,
-  // },
   {
     path: "/admin",
     element: <ProtectedAdmin><AdminHome /></ProtectedAdmin>,
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
   {
     path: "/forgot-password",
     element: <ForgotPasswordPage />,
+  },
+  {
+    path: "/stripe-checkout",
+    element: <Protected><StripeCheckout /></Protected>,
   },
   {
     path: "*",

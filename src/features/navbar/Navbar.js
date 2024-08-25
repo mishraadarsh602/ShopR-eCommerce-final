@@ -45,12 +45,10 @@ const Navbar = ({ children }) => {
   // const user = useSelector(selectLoggedInUser);
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo);
-  console.log("Navbar userInfo",userInfo)
   const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
     dispatch(fetchLoggedInUserAsync());
-    console.log("userInfo",userInfo)
   },[dispatch])
   
 
@@ -66,7 +64,7 @@ const Navbar = ({ children }) => {
             <div className="flex flex-col flex-row md:flex-row lg:flex-row h-16 items-center md:justify-between py-2">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <h6 className="text-white-600">Welcome to Our Store Hiscraves</h6>
+                  <h6 className="text-white-600">Welcome to Our Store ShopR</h6>
                 </div>
               </div>
               <div className="flex items-center">
@@ -75,7 +73,7 @@ const Navbar = ({ children }) => {
                     <PhoneIcon className='h-5 w-5 bg-gray-900' ></PhoneIcon>
                     <h6 className="text-white-600 ml-1">
 
-                      Call Us: 1234567890</h6>
+                      Call Us : 9823787367</h6>
                   </Link>
 
                 </div>
@@ -107,12 +105,13 @@ const Navbar = ({ children }) => {
                     <div className="flex-shrink-0">
 
                       <Link to="/">
-                        <h6 className="text-white-600">Logo Here</h6>
+                       <img className='logo h-8' src="http://localhost:3000/assets/images/logo.png" />
                       </Link>
                     </div>
 
                   </div>
                   <div className="block">
+
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
                         type="button"
@@ -121,13 +120,12 @@ const Navbar = ({ children }) => {
                         <SearchIcon className="h-6 w-6" aria-hidden="true" />
 
                       </button>
-                      <button
+                      {/* <button
                         type="button"
                         className="ml-auto flex-shrink-0 rounded-full  p-1 pl-2  text-gray-400 hover:text-black "
                       >
-                        {/* <HeartIcon className="h-6 w-6" aria-hidden="true" /> */}
-                        <WishlistIcon></WishlistIcon>
-                      </button>
+                          <WishlistIcon></WishlistIcon>
+                      </button> */}
                       <Link to="/cart" className="p-1 pl-2">
                         <button
                           type="button"

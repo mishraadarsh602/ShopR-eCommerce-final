@@ -16,7 +16,7 @@ import LatestProducts from './LatestProducts';
 import SimilarCategories from './SimilarProductCategories';
 import SimilarProductCategories from './SimilarProductCategories';
 import ReactImageMagnify from 'react-image-magnify';
-import {Grid} from  'react-loader-spinner'
+import { Grid } from 'react-loader-spinner'
 
 const colors = [
   { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -52,22 +52,21 @@ export default function ProductDetail() {
   const items = useSelector(selectItems);
   const product = useSelector(selectProductById);
   const cart = useSelector((state) => state.items)
-  const status = selectProductListStatus();
   const dispatch = useDispatch();
   const params = useParams();
   const alert = useAlert();
   const [mainImg, setMainImg] = useState(0);
   useEffect(() => {
-    // console.log("id : ",params.id)
     dispatch(fetchProductByIdAsync(params.id))
   }, [dispatch, params.id])
 
   //add to cart
   const handleCart = (e) => {
     e.preventDefault();
-
+    console.log("items:", items, ",product:", product)
     if (items.findIndex(item => item.product.id === product.id) < 0) {
-      const newItem = { product: product.id,quantity: 1 }
+
+      const newItem = { product: product.id, quantity: 1 }
       // delete newItem["id"];
       dispatch(addToCartAsync(newItem))
       //TODO : It will be based on server response of backend
@@ -82,8 +81,7 @@ export default function ProductDetail() {
 
   const handleMainImg = (e, index) => {
     setMainImg(index);
-    console.log("index", index);
-    console.log("mainimg", mainImg);
+
 
   }
   const handleWishlist = (e) => {
@@ -93,7 +91,7 @@ export default function ProductDetail() {
   return (
     <>
       <div className="bg-white">
-        {
+        {/* {
           status==='loading' ? (
             <Grid
             height="80"
@@ -107,7 +105,7 @@ export default function ProductDetail() {
 
             />
           ):null
-        }
+        } */}
         <div className='productSection mb-10'>
           {product && (
 
@@ -115,25 +113,6 @@ export default function ProductDetail() {
 
               <nav aria-label="Breadcrumb">
                 <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                  {/* {product.breadcrumbs && product.breadcrumbs.map((breadcrumb) => (
-                <li key={breadcrumb.id}>
-                  <div className="flex items-center">
-                    <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
-                      {breadcrumb.name}
-                    </a>
-                    <svg
-                      width={16}
-                      height={20}
-                      viewBox="0 0 16 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                      className="h-5 w-4 text-gray-300"
-                    >
-                      <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                    </svg>
-                  </div>
-                </li>
-              ))} */}
 
                 </ol>
               </nav>
@@ -144,47 +123,43 @@ export default function ProductDetail() {
 
                     <div className="mainimg">
                       <div className="rounded-lg lg:block">
-                        {/* <img
-                          src={product.images[mainImg]}
-                          alt={product.title}
-                          className=" object-cover object-center w-full"
-                        /> */}
+
                         <div id="imageMagnifyer" >
-                            <ReactImageMagnify {...{
-                              smallImage: {
-                                alt: product.title,
-                                isFluidWidth: true,
-                                src: product.images[mainImg],
-                              },
-                              largeImage: {
-                                src: product.images[mainImg],
-                                width:1000,
-                                height:800,
-                                zIndex:100000,
-                                position:"fixed",
-                               
-
-                                
-                              },
-                              enlargedImageContainerStyle	:{
-                               
-                                // overflow:"hidden",
-                                // zIndex:100000,
-
-
-                              },
-                              enlargedImageStyle	:{
-                              
-                                position:"fixed",
-                              },
-                              // enlargedImageContainerClassName	: "magnifyercontainerclass",
-                              // enlargedImageClassName	:"magnifyerimgclass",
-                              // enlargedImagePosition	: "over",
+                          <ReactImageMagnify {...{
+                            smallImage: {
+                              alt: product.title,
+                              isFluidWidth: true,
+                              src: product.images[mainImg],
+                            },
+                            largeImage: {
+                              src: product.images[mainImg],
+                              width: 1000,
+                              height: 800,
+                              zIndex: 100000,
+                              position: "fixed",
 
 
 
-                            }} />
-                       
+                            },
+                            enlargedImageContainerStyle: {
+
+                              // overflow:"hidden",
+                              // zIndex:100000,
+
+
+                            },
+                            enlargedImageStyle: {
+
+                              position: "fixed",
+                            },
+                            // enlargedImageContainerClassName	: "magnifyercontainerclass",
+                            // enlargedImageClassName	:"magnifyerimgclass",
+                            // enlargedImagePosition	: "over",
+
+
+
+                          }} />
+
                         </div>
                       </div>
                     </div>
@@ -193,11 +168,11 @@ export default function ProductDetail() {
                         <img
                           onClick={(e) => handleMainImg(e, 0)}
                           src={product.images[0]}
-                          alt={product.title}
+                          alt={product.id}
                           className=" object-cover object-center h-full"
                         />
                       </div>
-                      <div className="rounded-lg lg:block border border-2">
+                      {/* <div className="rounded-lg lg:block border border-2">
                         <img
                           onClick={(e) => handleMainImg(e, 1)}
                           src={product.images[1]}
@@ -220,7 +195,7 @@ export default function ProductDetail() {
                           alt={product.title}
                           className=" object-cover object-center h-full "
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 
@@ -302,7 +277,7 @@ export default function ProductDetail() {
 
                     <form className="mt-4">
                       {/* Colors */}
-                      <div>
+                      {/* <div>
                         <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
                         <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
@@ -335,10 +310,10 @@ export default function ProductDetail() {
                             ))}
                           </div>
                         </RadioGroup>
-                      </div>
+                      </div> */}
 
                       {/* Sizes */}
-                      <div className="mt-10">
+                      {/* <div className="mt-10">
                         <div className="flex items-center justify-between">
                           <h3 className="text-sm font-medium text-gray-900">Size</h3>
                           <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
@@ -388,7 +363,7 @@ export default function ProductDetail() {
                                           stroke="currentColor"
                                         >
                                           {/* <line x1={0} y1={100} x2={100} y2={0} vectorEffect="non-scaling-stroke" /> */}
-                                        </svg>
+                      {/* </svg>
                                       </span>
                                     )}
                                   </>
@@ -397,7 +372,7 @@ export default function ProductDetail() {
                             ))}
                           </div>
                         </RadioGroup>
-                      </div>
+                      </div>  */}
 
                       <div className="grid  grid-cols-1 xl:grid-cols-2 lg:gap-2 my-4">
                         <button
@@ -408,14 +383,14 @@ export default function ProductDetail() {
                           <CartIcon color="#ffffff" className="h-6 w-6 text-white mr-2" />  <span className='ml-2'>ADD TO CART</span>
 
                         </button>
-                        <button
+                        {/* <button
                           onClick={handleWishlist}
                           // type="submit"
                           className="mt-3  flex w-full items-center justify-center rounded-md border border-transparent bg-yellow-500 hover:bg-yellow-600 px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 wishlistbtn"
                         >
                           <WishlistIcon color="#ffffff" className="h-6 w-6 text-white mr-2" />  <span className='ml-2'>ADD TO WISHLIST</span>
 
-                        </button>
+                        </button> */}
                       </div>
 
 
@@ -433,16 +408,15 @@ export default function ProductDetail() {
         </div>
         {/*product details ends*/}
 
-
-
         {/* Similar products category*/}
-        <div className='mt-5 p-5 m-10 pb-11'>
+        <div className='mt-5 p-5 m-10 mb-0'>
           <SimilarProductCategories />
 
         </div>
         {/*latest products*/}
-        <div className='mt-5 p-5 m-10 pb-11'>
-          <LatestProducts />
+        <div className='p-5 m-10 mt-5 mb-0'>
+          <LatestProducts headingtext="Best Selling Products" from="51" to="60" />
+
 
         </div>
         <br /><br />

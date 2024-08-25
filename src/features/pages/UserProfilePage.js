@@ -7,8 +7,6 @@ const UserProfilePage = () => {
     <div>
          <Navbar>
            <div className="m-auto ">
-            My Profile
-          
             <UserProfile/>
             </div>
          </Navbar>

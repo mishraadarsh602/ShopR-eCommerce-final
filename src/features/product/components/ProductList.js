@@ -21,33 +21,32 @@ import Pagination from '../../common/Pagination';
 import { fetchBrands } from '../productAPI';
 // import { Grid } from 'react-loader-spinner';
 import ProductGrid from "./ProductGrid"
-import PriceRangeFilter from './PriceRangeFilter';
+// import PriceRangeFilter from './PriceRangeFilter';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 export default function ProductList() {
   const products = useSelector(selectAllProducts);
-  console.log("products : ",products)
   const totalItems = useSelector(selectTotalItems);
   const categories = useSelector(selectCategories);
   const brands = useSelector(selectBrands);
-  const sizes =  [
-      { value: 's', label: 'S', checked: false },
-      { value: 'm', label: 'M', checked: false },
-      { value: 'l', label: 'L', checked: false },
-      { value: 'xl', label: 'XL', checked: false },
-      { value: 'xxl', label: 'XXL', checked: false },
-    ];
-  const colors = [
-    
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: true },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
-    
-  ] ; 
+  // const sizes =  [
+  //     { value: 's', label: 'S', checked: false },
+  //     { value: 'm', label: 'M', checked: false },
+  //     { value: 'l', label: 'L', checked: false },
+  //     { value: 'xl', label: 'XL', checked: false },
+  //     { value: 'xxl', label: 'XXL', checked: false },
+  //   ];
+  // const colors = [
+
+  //     { value: 'white', label: 'White', checked: false },
+  //     { value: 'beige', label: 'Beige', checked: false },
+  //     { value: 'blue', label: 'Blue', checked: true },
+  //     { value: 'brown', label: 'Brown', checked: false },
+  //     { value: 'green', label: 'Green', checked: false },
+  //     { value: 'purple', label: 'Purple', checked: false },
+
+  // ] ; 
   const dispatch = useDispatch();
 
   const filters = [
@@ -61,29 +60,29 @@ export default function ProductList() {
       name: 'Brands',
       options: brands,
     },
-    {
-      id:'size',
-      name:'sizes',
-      options:sizes
-    },
-    {id:'color',
-    name:'colors',
-    options:colors
-    },
+    // {
+    //   id:'size',
+    //   name:'sizes',
+    //   options:sizes
+    // },
+    // {id:'color',
+    // name:'colors',
+    // options:colors
+    // },
 
-     
+
   ]
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
+  const [minPriceRange, setMinPriceRange] = useState(0);
+  const [MaxPriceRange, setMaxPriceRange] = useState(1000);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [page, setPage] = useState(1);
   const status = useSelector(selectProductListStatus);
 
   const handleFilter = (e, section, option) => {
-  
-    // e.target.checked
+
     const newFilter = { ...filter };
-    // console.log("kk",newFilter);
     if (e.target.checked) {
       if (newFilter[section.id]) {
         newFilter[section.id].push(option.value);
@@ -97,7 +96,6 @@ export default function ProductList() {
       newFilter[section.id].splice(index, 1);
     }
 
-    // console.log({newFilter})
     setFilter(newFilter);
     //
   }
@@ -105,12 +103,10 @@ export default function ProductList() {
   const handleSort = (e, option) => {
     const sort = { _sort: option.sort, _order: option.order };
 
-    // console.log({sort})
     setSort(sort);
     //
   }
   const handlePage = (page) => {
-    // console.log(page)
     setPage(page);
   }
 
@@ -131,10 +127,9 @@ export default function ProductList() {
     const pagination = {
       _page: page, _limit: ITEMS_PER_PAGE
     }
-    
-    dispatch(fetchProductsByFiltersAsync({ filter, sort,pagination }))
-    console.log("filter, sort, pagination", {filter, sort, pagination })
-  }, [dispatch, filter,sort, page]);
+
+    dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }))
+  }, [dispatch, filter, sort, page]);
 
   const sortOptions = [
     { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -143,109 +138,108 @@ export default function ProductList() {
   ];
 
   return (
-   
-        <div className="bg-white">
-        
-          <div>
-            {/* Mobile filter dialog */}
-            <MobileFilter filters={filters} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} setMobileFiltersOpen={setMobileFiltersOpen}></MobileFilter>
 
-            <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-5">
-                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl  textplayfair">Product Filters</h2>
+    <div className="bg-white">
 
-                <div className="flex items-center">
-                  <Menu as="div" className="relative inline-block text-left">
-                    <div>
-                      <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                        Sort
-                        <ChevronDownIcon
-                          className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                          aria-hidden="true"
-                        />
-                      </Menu.Button>
-                    </div>
+      <div>
+        {/* Mobile filter dialog */}
+        <MobileFilter filters={filters} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} setMobileFiltersOpen={setMobileFiltersOpen}></MobileFilter>
 
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div className="py-1">
-                          {sortOptions.map((option) => (
-                            <Menu.Item key={option.name}>
-                              {({ active }) => (
-                                <p
-                                  onClick={e => handleSort(e, option)}
-                                  className={classNames(
-                                    option.current ? 'font-medium text-gray-900' : 'text-gray-500',
-                                    active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm'
-                                  )}
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-5">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl  textplayfair">Product Filters</h2>
 
+            <div className="flex items-center">
+              <Menu as="div" className="relative inline-block text-left">
+                <div>
+                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                    Sort
+                    <ChevronDownIcon
+                      className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                      aria-hidden="true"
+                    />
+                  </Menu.Button>
+                </div>
 
-                                >
-
-                                  {option.name}
-                                </p>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="py-1">
+                      {sortOptions.map((option) => (
+                        <Menu.Item key={option.name}>
+                          {({ active }) => (
+                            <p
+                              onClick={e => handleSort(e, option)}
+                              className={classNames(
+                                option.current ? 'font-medium text-gray-900' : 'text-gray-500',
+                                active ? 'bg-gray-100' : '',
+                                'block px-4 py-2 text-sm'
                               )}
-                            </Menu.Item>
-                          ))}
-                        </div>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
 
-                  <button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
-                    <span className="sr-only">View grid</span>
-                    <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
-                  </button>
-                  <button
-                    type="button"
-                    className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
-                    onClick={() => setMobileFiltersOpen(true)}
-                  >
-                    <span className="sr-only">Filters</span>
-                    <FunnelIcon className="h-5 w-5" aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
 
-              <section aria-labelledby="products-heading" className="pb-24 pt-6">
-                <h2 id="products-heading" className="sr-only">
-                  Products
-                </h2>
+                            >
 
-                <div className="grid grid-cols-1 gap-x-0 gap-y-10 lg:grid-cols-4">
-                  {/* Filters */}
-                  <DesktopFilter filters={filters} handleFilter={handleFilter}></DesktopFilter>
+                              {option.name}
+                            </p>
+                          )}
+                        </Menu.Item>
+                      ))}
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
 
-                  {/* Product grid */}
-                  <div className="lg:col-span-3">
-                    {/*Product list page starts*/}
-                    <ProductGrid products={products} status={status} totalItems={totalItems} ></ProductGrid>
-                    {/*Product list page ends*/}
-
-                  </div>
-                </div>
-                {/*Pagination starts*/}
-                <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-                  {/* {console.log("inner ",page)} */}
-                  <Pagination totalItems={totalItems} page={page} setPage={setPage} handlePage={handlePage} />
-                </div>
-                {/* Pagination Ends here */}
-              </section>
-            </main>
+              {/* <button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
+                <span className="sr-only">View grid</span>
+                <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
+              </button> */}
+              <button
+                type="button"
+                className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
+                onClick={() => setMobileFiltersOpen(true)}
+              >
+                <span className="sr-only">Filters</span>
+                <FunnelIcon className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
           </div>
-        </div>
+
+          <section aria-labelledby="products-heading" className="pb-24 pt-6">
+            <h2 id="products-heading" className="sr-only">
+              Products
+            </h2>
+
+            <div className="grid grid-cols-1 gap-x-0 gap-y-10 lg:grid-cols-4">
+              {/* Filters */}
+              <DesktopFilter filters={filters} handleFilter={handleFilter}></DesktopFilter>
+
+              {/* Product grid */}
+              <div className="lg:col-span-3">
+                {/*Product list page starts*/}
+                <ProductGrid products={products} status={status} totalItems={totalItems} ></ProductGrid>
+                {/*Product list page ends*/}
+
+              </div>
+            </div>
+            {/*Pagination starts*/}
+            <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+              <Pagination totalItems={totalItems} page={page} setPage={setPage} handlePage={handlePage} />
+            </div>
+            {/* Pagination Ends here */}
+          </section>
+        </main>
+      </div>
+    </div>
 
 
-    
+
   );
 }
 
@@ -300,8 +294,10 @@ function DesktopFilter({ filters, handleFilter }) {
       ))}
 
       {/*price range starts*/}
-      <p className="mt-8 text-sm">Filter by Price</p>
-       <PriceRangeFilter></PriceRangeFilter>
+      {/* <p className="mt-8 text-sm">Filter by Price</p>
+       <PriceRangeFilter minPriceRange={minPriceRange} maxPriceRange={maxPriceRange}
+        handlePriceRange={handlePriceRange}/> */}
+
       {/*price range ends */}
     </form>
   </>
@@ -395,10 +391,10 @@ function MobileFilter({ mobileFiltersOpen, setMobileFiltersOpen, handleFilter, f
                   </Disclosure>
                 ))}
 
-                 {/*price range starts*/}
-      <p className="mt-8 text-sm">Filter by Price</p>
-       <PriceRangeFilter></PriceRangeFilter>
-      {/*price range ends */}
+                {/*price range starts*/}
+                <p className="mt-8 text-sm">Filter by Price</p>
+                {/* <PriceRangeFilter></PriceRangeFilter> */}
+                {/*price range ends */}
               </form>
             </Dialog.Panel>
           </Transition.Child>

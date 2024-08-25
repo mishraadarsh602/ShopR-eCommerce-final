@@ -422,7 +422,22 @@ flex-shrink: 0;
     top:1px;
 
 }
-
+.banner-slide-img{
+    background-position: center;
+    width: 100%;
+   
+    background-repeat: no-repeat;
+    height:286px;
+}
+.home-banner-slider .slick-prev{
+  left:0px!important;
+}
+.home-banner-slider .slick-next{
+   right:0px!important;
+  }
+  .mobile-banner{
+   display: none;
+  }
 /* -------------------------------------------------------------------------------
                                 Media Query Starts
 -------------------------------------------------------------------------------- */
@@ -484,6 +499,17 @@ flex-shrink: 0;
 }
 
 @media only screen and (max-width:585px) {
+    .mobile-banner{
+        display: block;
+       }
+       .desktop-banner{
+        display:none;
+       }
+       .banner-slide-img{
+        background-position: left;
+        
+       }
+       
     .sidebarmenu{
         width:100%!important;
     }

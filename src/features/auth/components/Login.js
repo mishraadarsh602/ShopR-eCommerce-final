@@ -19,8 +19,8 @@ const Login = () => {
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <img
                 className="mx-auto h-10 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt="Your Company"
+                src="http://localhost:3000/assets/images/logo.png"
+                alt="ShopR"
               />
               <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Sign in to your account
@@ -30,7 +30,6 @@ const Login = () => {
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
               <form noValidate className="space-y-6" onSubmit={handleSubmit((data) => {
                 dispatch(loginUserAsync({ email: data.email, password: data.password }))
-                console.log({ email: data.email, password: data.password });
               })}>            <div>
                   <label htmlFor="email"  className="block text-sm font-medium leading-6 text-gray-900">
                     Email address
@@ -71,7 +70,7 @@ const Login = () => {
                                     - Can contain special characters`}
                       })}
                       type="password"
-                     value="Adarsh@123"
+                   
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <p className='text-red-500'>{errors.password && errors.password.message}</p>
@@ -96,6 +95,11 @@ const Login = () => {
                   Create an account
                 </Link>
               </p>
+            </div>
+            <div className="mt-3  absolute bottom-10 right-10 text-gray-400">Demo Login Details
+              <h6 className='text-gray-400'>Email : test@gmail.com</h6>
+              <h6 className='text-gray-400'>Password : Adarsh@123</h6>
+
             </div>
           </div>
         </div>

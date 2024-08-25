@@ -55,9 +55,10 @@ useEffect(() => {
 
     return (
         <div>
-            <div className="mx-auto mt-8 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h1 className="text-4xl my-5 pt-5 font-bold tracking-tight text-gray-900">Name : {userInfo.name ? userInfo.name : "Guest User"} </h1>
-                <h3 className="text-2xl my-5 pt-5 font-bold tracking-tight text-gray-900">Email Address : {userInfo.email} </h3>
+            <div className="mx-auto pt-3 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
+             <div className='bg-gray-200 mb-8 inline-block ps-2 pe-10 py-1'><h6>User / My Profile</h6></div>
+                <h1 className="text-xl    tracking-tight text-gray-900">Name : {userInfo.name ? userInfo.name : "Guest User"} </h1>
+                <h3 className="text-xl  mb-8  tracking-tight text-gray-900">Email Address : {userInfo.email} </h3>
               {
                 userInfo.role==="admin" && (
                     <h3 className="text-2xl my-5 pt-5 font-bold tracking-tight text-gray-900">User : {userInfo.role} </h3>

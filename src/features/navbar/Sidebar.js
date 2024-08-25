@@ -49,7 +49,7 @@ export default function Sidebar({ showSidebar, setShowSidebar, navigation, userI
                                     </Link>
                                 </li>
                                 {navigation.map((item) => (
-                                    item[userInfo.role] ? (<li>
+                                    item[userInfo.role] ? (<li key={item.name} >
                                         <Link
                                             key={item.name}
                                             to={item.link}

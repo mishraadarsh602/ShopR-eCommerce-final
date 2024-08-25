@@ -15,20 +15,26 @@ const UserOrders = () => {
 
  useEffect(() => {
         dispatch(fetchLoggedInUserOrdersAsync());
+        dispatch(fetchLoggedInUserOrdersAsync());
+
        console.log("useEffect in UserOrders");
+      
+      
     }, [dispatch]);
     // useEffect(() => {
     //     dispatch(fetchLoggedInUserOrdersAsync(userInfo.id));
 
     // }, [dispatch, userInfo]);
     return (
-        <div>
+        <div className="border-gray-200">
             {
                 orders && orders.map((order) => (
                     <div key={order.id}>
-                        <div className="mx-auto mt-8 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
-                            <h1 className="text-4xl my-5 pt-5 font-bold tracking-tight text-gray-900">Order # {order.id}</h1>
-                            <h3 className="text-2xl my-5 pt-5 font-bold tracking-tight text-red-900">Order Status : {order.status}</h3>
+                        <div className="mx-auto p-3 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
+                        {/* <div className='bg-gray-200 mb-8 inline-block ps-2 pe-10 py-1'><h6>User / My Orders</h6></div> */}
+
+                            <h1 className="text-xl  tracking-tight text-gray-900">Order # {order.id}</h1>
+                            <h3 className="text-xl mb-8 tracking-tight text-red-900">Order Status : {order.status}</h3>
 
                             <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                                 <div className="flow-root">

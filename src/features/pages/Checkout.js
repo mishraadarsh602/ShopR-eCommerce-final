@@ -1,7 +1,7 @@
 import { deleteItemFromCartAsync, selectItems, updateCartAsync } from '../../features/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from "react-router-dom"
-import {  useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { addOrderAsync, selectCurrentOrder } from '../order/orderSlice';
 // import { updateCartAsync } from '../../features/cart/cartSlice';
@@ -12,93 +12,76 @@ import { fetchLoggedInUser } from '../user/userAPI';
 const Checkout = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(true);
-   
-    const userInfo  = useSelector(selectUserInfo);
-    console.log("checkout userInfo",userInfo);
-     //byme
-    // const user  = useSelector(selectLoggedInUser);
-    // console.log("user selctloggedinUser checkout page",usert)
 
+    const userInfo = useSelector(selectUserInfo);
+ 
     const items = useSelector(selectItems);
     const currentOrder = useSelector(selectCurrentOrder);
     const totalAmount = items.reduce((amount, item) => amount + discountedPrice(item.product) * item.quantity, 0);
     const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
-    const [selectedAddress,setSelectedAddress] = useState();
-    const [paymentMethod,setPaymentMethod] = useState("cash");
+    const [selectedAddress, setSelectedAddress] = useState();
+    const [paymentMethod, setPaymentMethod] = useState("cash");
 
     const handleQuantity = (e, item) => {
-        dispatch(updateCartAsync({id:item.id, quantity: +e.target.value }))
+        dispatch(updateCartAsync({ id: item.id, quantity: +e.target.value }))
     }
     const handleRemove = (e, item) => {
         dispatch(deleteItemFromCartAsync(item.id));
     }
-    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const handleAddress=(e)=>{
+    const handleAddress = (e) => {
 
-        setSelectedAddress(userInfo.addresses[e.target.value]) ;
-    } 
-    const handlePayment=(e)=>{
-        setPaymentMethod(e.target.value) ;
-    } 
-    const handleOrder=(e)=>{
-        if(selectedAddress && paymentMethod){
-            const order  = {
+        setSelectedAddress(userInfo.addresses[e.target.value]);
+    }
+    const handlePayment = (e) => {
+        setPaymentMethod(e.target.value);
+    }
+    const handleOrder = (e) => {
+        if (selectedAddress && paymentMethod) {
+            const order = {
                 items,
                 totalAmount,
                 totalItems,
                 paymentMethod,
                 selectedAddress,
-                user:userInfo.id,
-                status:"pending",//pending,processing,delivered,canceled,failed
+                user: userInfo.id,
+                status: "pending",//pending,processing,delivered,canceled,failed
             }
-            console.log("order",order)
-        dispatch(addOrderAsync(order));
-        
+            dispatch(addOrderAsync(order));
 
-        }else{
+
+        } else {
             alert("Please select address and payment method")
         }
-      //TODO : Redirect to order-success page
-    //TODO : Clear cart
-    //TODO : On server change no of stock 
-} 
+        //TODO : Redirect to order-success page
+        //TODO : Clear cart
+        //TODO : On server change no of stock 
+    }
 
-useEffect(()=>{
-    dispatch(fetchLoggedInUserAsync());
-},[dispatch])
+    useEffect(() => {
+        dispatch(fetchLoggedInUserAsync());
+    }, [dispatch])
     return (
         <>
             {!items.length && <Navigate to="/" replace={true}> </Navigate>}
-            {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} replace={true}> </Navigate>}
+            {currentOrder && currentOrder.paymentMethod==="cash" && 
+               <Navigate to={`/order-success/${currentOrder.id}`} replace={true} />
+            }
+             {currentOrder && currentOrder.paymentMethod==="card" && 
+               <Navigate to={`/stripe-checkout/`} replace={true} />
+            }
 
-            {/* {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} replace={true}> </Navigate>} */}
-/
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                 <div className="grid grid-cols-1 gap-x-5 gap-y-10 lg:grid-cols-5">
                     <div className='lg:col-span-3'>
-                        {/* {console.log("before submit checkout user data",userInfo)} */}
-                        <form className='bg-white px-5 mt-8 py-5' autoComplete='off' noValidate onSubmit={handleSubmit((data)=>{
-                            //  {console.log("after submit checkout user data",userInfo)}
-                            //  console.log(data);
-                            //  if (Array.isArray(userInfo)) {
-                                // Your dispatch code here
-                                  //    dispatch(updateUserAsync({...user,addresses:[...user.addresses,data]})) ;
-                          dispatch(updateUserAsync({...userInfo,addresses:[...userInfo.addresses,data]}));
+                        <form className='bg-white px-5 mt-8 py-5' autoComplete='off' noValidate onSubmit={handleSubmit((data) => {
+                             dispatch(updateUserAsync({ ...userInfo, addresses: [...userInfo.addresses, data] }));
+                            reset()
 
-
-                            // } else {
-                            // //     // console.error("user.addresses is not an array.");
-                            //     dispatch(updateUserAsync({...userInfo,addresses:[data]}));
-
-                            // }
-
-                  
-                      reset()
-                    
                         })}>
                             <div className="space-y-12">
                                 <div className="border-b border-gray-900/10 pb-12">
@@ -108,12 +91,12 @@ useEffect(()=>{
                                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                         <div className="sm:col-span-3">
                                             <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-                                               Full name
+                                                Full name
                                             </label>
                                             <div className="mt-2">
                                                 <input
                                                     type="text"
-                                                   {...register("name",{required:"Name is required"})}
+                                                    {...register("name", { required: "Name is required" })}
                                                     id="name"
                                                     autoComplete='off'
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -121,7 +104,7 @@ useEffect(()=>{
                                             </div>
                                         </div>
 
-                                       
+
 
                                         <div className="sm:col-span-4">
                                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
@@ -130,7 +113,7 @@ useEffect(()=>{
                                             <div className="mt-2">
                                                 <input
                                                     id="email"
-                                                    {...register("email",{required:"Email is required", pattern: {value:/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi,message:"Invalid email address"}})}
+                                                    {...register("email", { required: "Email is required", pattern: { value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi, message: "Invalid email address" } })}
 
                                                     type="email"
                                                     autoComplete='off'
@@ -147,7 +130,7 @@ useEffect(()=>{
                                             <div className="mt-2">
                                                 <input
                                                     id="phone"
-                                                    {...register("phone",{required:"Phone is required"})}
+                                                    {...register("phone", { required: "Phone is required" })}
                                                     autoComplete='off'
                                                     type="tel"
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -162,7 +145,7 @@ useEffect(()=>{
                                             <div className="mt-2">
                                                 <input
                                                     type="text"
-                                                    {...register("street",{required:"Street is required"})}
+                                                    {...register("street", { required: "Street is required" })}
                                                     id="street"
                                                     autoComplete='off'
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -177,8 +160,8 @@ useEffect(()=>{
                                             <div className="mt-2">
                                                 <input
                                                     type="text"
-                                                    {...register("city",{required:"City is required"})}
-                                                    id="city"                                      
+                                                    {...register("city", { required: "City is required" })}
+                                                    id="city"
                                                     autoComplete='off'
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
@@ -192,8 +175,8 @@ useEffect(()=>{
                                             <div className="mt-2">
                                                 <input
                                                     type="text"
-                                                    {...register("state",{required:"State is required"})}
-                                                    id="state"                                                  
+                                                    {...register("state", { required: "State is required" })}
+                                                    id="state"
                                                     autoComplete='off'
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
@@ -207,7 +190,7 @@ useEffect(()=>{
                                             <div className="mt-2">
                                                 <input
                                                     type="text"
-                                                    {...register("pinCode",{required:"PinCode is required"})}
+                                                    {...register("pinCode", { required: "PinCode is required" })}
                                                     autoComplete='off'
                                                     id="pinCode"
                                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -235,7 +218,7 @@ useEffect(()=>{
                                         Choose from existing addresses
                                     </p>
                                     <ul>
-                                         {userInfo &&  userInfo.addresses &&  userInfo.addresses.map((address,index) => (
+                                        {userInfo && userInfo.addresses && userInfo.addresses.map((address, index) => (
                                             <li key={index} className="border-2 border-gray-200 px-5 flex justify-between gap-x-6 py-5">
 
                                                 <div className="flex gap-x-4">
@@ -263,8 +246,8 @@ useEffect(()=>{
 
                                                 </div>
                                             </li>
-                                        ))} 
-                                    </ul> 
+                                        ))}
+                                    </ul>
 
                                     <div className="mt-10 space-y-10">
 
@@ -272,18 +255,18 @@ useEffect(()=>{
                                             <legend className="text-sm font-semibold leading-6 text-gray-900">Payment Methods</legend>
                                             <p className="mt-1 text-sm leading-6 text-gray-600">Choose One</p>
                                             <div className="mt-6 space-y-6">
-                                            <div className="flex items-center gap-x-3">
+                                                <div className="flex items-center gap-x-3">
                                                     <input
                                                         id="cash"
                                                         name="payments"
                                                         value="cash"
                                                         onChange={handlePayment}
                                                         type="radio"
-                                                        checked={paymentMethod==="cash"}
+                                                        checked={paymentMethod === "cash"}
                                                         className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                     <label htmlFor="cash" className="block text-sm font-medium leading-6 text-gray-900">
-                                                        Cash 
+                                                        Cash
                                                     </label>
                                                 </div>
                                                 <div className="flex items-center gap-x-3">
@@ -294,7 +277,7 @@ useEffect(()=>{
                                                         onChange={handlePayment}
 
                                                         type="radio"
-                                                        checked={paymentMethod==="card"}
+                                                        checked={paymentMethod === "card"}
 
                                                         className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
@@ -302,7 +285,7 @@ useEffect(()=>{
                                                         Card Payment
                                                     </label>
                                                 </div>
-                                               
+
 
                                             </div>
                                         </fieldset>
@@ -384,7 +367,7 @@ useEffect(()=>{
                                 <div className="mt-6">
                                     <Link to="/checkout" >
                                         <div
-                                           onClick={handleOrder}
+                                            onClick={handleOrder}
                                             className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                                         >
                                             Order Now
