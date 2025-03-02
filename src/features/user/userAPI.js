@@ -1,7 +1,12 @@
 
 export function fetchLoggedInUserOrders() {
    return new Promise(async (resolve) => {
-      const response = await fetch('http://localhost:8080/orders/own');
+      const response = await fetch('http://localhost:8080/orders/own',{
+         credentials: 'include',
+         headers: {
+             "Content-Type": "application/json"
+         }
+      });
       const data = await response.json();
       console.log("data  userAPI userOrder ",data)
       resolve({ data });
@@ -10,7 +15,12 @@ export function fetchLoggedInUserOrders() {
 
 export function fetchLoggedInUser() {
    return new Promise(async (resolve) => {
-      const response = await fetch('http://localhost:8080/users/own');
+      const response = await fetch('http://localhost:8080/users/own',{
+         credentials: 'include',
+         headers: {
+             "Content-Type": "application/json"
+         }
+      });
       const data = await response.json();
       console.log("data",data)
       resolve({ data })
@@ -25,6 +35,7 @@ export function updateUser(update) {
          console.log("updateUser in userApi value ", update)
          const response = await fetch('http://localhost:8080/users/' + update.id, {
             method: "PATCH",
+            credentials: 'include',
             headers: {
                "Content-Type": "application/json"
             },

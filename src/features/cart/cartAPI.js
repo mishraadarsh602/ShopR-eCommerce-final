@@ -4,6 +4,7 @@ export function addToCart(item){
     return new Promise(async(resolve) =>{
     const response = await fetch('http://localhost:8080/cart',{
        method:"POST",
+       credentials: 'include', 
        headers:{
           "Content-Type":"application/json"
        },
@@ -19,7 +20,12 @@ export function addToCart(item){
 export function fetchItemsByUserId(){
    // console.log("userId:", userId)
     return new Promise(async(resolve) =>{
-    const response = await fetch('http://localhost:8080/cart');
+      const response = await fetch('http://localhost:8080/cart', {
+         credentials: 'include',
+         headers: {
+             "Content-Type": "application/json"
+         }
+     });
     const data  = await response.json()
     resolve({data})
     })

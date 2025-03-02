@@ -2,6 +2,7 @@ export function addOrder(order){
     return new Promise(async(resolve) =>{
     const response = await fetch('http://localhost:8080/orders',{
        method:"POST",
+       credentials: 'include',
        headers:{
           "Content-Type":"application/json"
        },
@@ -18,6 +19,7 @@ export function addOrder(order){
   return new Promise(async(resolve) =>{
   const response = await fetch('http://localhost:8080/orders/'+order.id,{
      method:"PATCH",
+     credentials: 'include',
      headers:{
         "Content-Type":"application/json"
      },
@@ -45,7 +47,13 @@ export function fetchAllOrders(sort,pagination) {
    // queryString = queryString.slice(0,-1);
    return new Promise(async(resolve) =>{
      const url = "http://localhost:8080/orders?"+queryString;
-   const response = await fetch(url);
+   const response = await fetch(url,{
+      credentials: 'include',
+      headers: {
+         "Content-Type": "application/json"
+     }
+
+   });
    const data  = await response.json()
  const totalOrders  = await response.headers.get('X-Total-Count');
  
